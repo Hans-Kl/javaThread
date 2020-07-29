@@ -1,12 +1,15 @@
-package singleton;
+package singleton.hungry;
+
+import annotation.Safe;
 
 /**
  * 饿汉式单例模式，不存在线程安全问题
- * 2020/7/29 11:55
+ * <p>2020/7/29 11:55</p>
  *
  * @author konglinghan
  * @version 1.0
  */
+@Safe
 public class HungrySingleton {
     static final String constString = "HungrySingleton常量";
     static final HungrySingleton instance = new HungrySingleton();

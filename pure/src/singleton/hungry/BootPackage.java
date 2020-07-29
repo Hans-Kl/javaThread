@@ -1,8 +1,8 @@
-package singleton;
+package singleton.hungry;
 
 /**
  * 启动类
- * 2020/7/29 13:31
+ * <p>2020/7/29 13:31</p>
  *
  * @author konglinghan
  * @version 1.0
