@@ -1,4 +1,4 @@
-package singleton.lazy;
+package singleton.lazy.synchronize;
 
 import annotation.NotSafe;
 
@@ -10,17 +10,17 @@ import annotation.NotSafe;
  * @version 1.0
  */
 @NotSafe
-public class NotSafeSingleton {
-    private NotSafeSingleton instance;
+public class NotSafeLazySingleton {
+    private static NotSafeLazySingleton instance;
 
-    private NotSafeSingleton() {
+    private NotSafeLazySingleton() {
 
     }
 
-    public NotSafeSingleton getInstance() {
+    public static NotSafeLazySingleton getInstance() {
         //if-then-act操作，非原子操作，会有线程安全问题
         if (instance != null) {
-            instance = new NotSafeSingleton();
+            instance = new NotSafeLazySingleton();
         }
         return instance;
     }
