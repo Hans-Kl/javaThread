@@ -7,3 +7,6 @@
 *.iml
 out
 gen
+/pure/src/signal/synchronize/demo/case01/
+/pure/src/util/
+pure/src/signal/lock/
