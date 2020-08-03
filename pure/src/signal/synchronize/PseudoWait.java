@@ -1,7 +1,5 @@
 package signal.synchronize;
 
-import com.sun.org.apache.bcel.internal.generic.RET;
-
 import java.util.Collection;
 
 /**
@@ -27,15 +25,14 @@ public class PseudoWait {
         releaseLock(this);//klh 释放锁
         pause(Thread.currentThread());//klh 暂停当前线程,等待唤醒<1>
 
-        boolean acquired = acquireLock(this);//klh 被唤醒，重新申请锁资源<2>
-        if (acquired) {//klh 如果没有获取到锁，线程阻塞，等待锁资源
-            waitSet.remove(Thread.currentThread());//klh 从等待集中移除
-        }
+        acquireLock(this);//klh 被唤醒，重新申请锁资源<2>
+        waitSet.remove(Thread.currentThread());//klh 从等待集中移除
         return;//klh wait()方法返回
     }
 
     /**
      * 暂停线程
+     *
      * @param thread
      */
     private void pause(Thread thread) {
@@ -43,20 +40,21 @@ public class PseudoWait {
 
     /**
      * 申请内部锁
+     *
      * @param monitor 锁所在的对象
-     * @return true，获取到锁；false，没有获取到锁
      */
-    private boolean acquireLock(Object monitor) {
+    private void acquireLock(Object monitor) {
         if (entrySet.isEmpty()) {
-            return true;
-        }else{
+            return;
+        } else {
+            //klh 如果没有获取到锁，线程阻塞，进入锁池等待锁资源
             entrySet.add(Thread.currentThread());
-            return false;
         }
     }
 
     /**
      * 释放锁
+     *
      * @param monitor 锁所在的对象
      */
     private void releaseLock(Object monitor) {
